@@ -13254,7 +13254,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Land Use Index color map similar to the NLCD</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Anderson Land Cover Classification System</span>
 <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;#5475a8&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>                           <span class="c1"># Water</span>
                                   <span class="s1">&#39;#e8d1d1&#39;</span><span class="p">,</span> <span class="s1">&#39;#e29e8c&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff0000&#39;</span><span class="p">,</span> <span class="s1">&#39;#b50000&#39;</span><span class="p">,</span>   <span class="c1"># Developed</span>
                                   <span class="s1">&#39;#d2cdc0&#39;</span><span class="p">,</span>                                    <span class="c1"># Barren</span>
@@ -13264,7 +13264,7 @@ div#notebook {
                                   <span class="s1">&#39;#fbf65d&#39;</span><span class="p">,</span> <span class="s1">&#39;#ca9146&#39;</span><span class="p">,</span>                         <span class="c1"># Planted/Cultivated</span>
                                   <span class="s1">&#39;#c8e6f8&#39;</span><span class="p">,</span> <span class="s1">&#39;#64b3d5&#39;</span><span class="p">,])</span>                       <span class="c1"># Wetlands</span>
 <span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>                 <span class="c1"># For errors in the dataset</span>
-<span class="n">cmap</span><span class="o">.</span><span class="n">set_over</span><span class="p">(</span><span class="s1">&#39;#ffcc00&#39;</span><span class="p">)</span>
+
 <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  
           <span class="mi">11</span><span class="p">,</span> <span class="c1"># Water                  # Open Water</span>
           <span class="mi">12</span><span class="p">,</span>                          <span class="c1"># Perennial Ice / Snow</span>
@@ -13353,7 +13353,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Land Use Index color map similar to the NLCD</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># USGS/EROS Vegetation Type</span>
 <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;#27009f&#39;</span><span class="p">,</span> 
                                   <span class="s1">&#39;#1db31d&#39;</span><span class="p">,</span> <span class="s1">&#39;#36d13b&#39;</span><span class="p">,</span> <span class="s1">&#39;#4fef4f&#39;</span><span class="p">,</span> <span class="s1">&#39;#77f472&#39;</span><span class="p">,</span> <span class="s1">&#39;#c7ffbd&#39;</span><span class="p">,</span>  <span class="c1"># Greens</span>
                                   <span class="s1">&#39;#1363d1&#39;</span><span class="p">,</span> <span class="s1">&#39;#4fa4f4&#39;</span><span class="p">,</span> <span class="s1">&#39;#3b95f4&#39;</span><span class="p">,</span> <span class="s1">&#39;#e0ffff&#39;</span><span class="p">,</span>             <span class="c1"># Blues</span>
@@ -13362,7 +13362,7 @@ div#notebook {
                                   <span class="s1">&#39;#633b31&#39;</span><span class="p">,</span> <span class="s1">&#39;#8b6359&#39;</span><span class="p">,</span> <span class="s1">&#39;#e0bdb3&#39;</span><span class="p">,</span> <span class="s1">&#39;#b38b81&#39;</span><span class="p">,</span> <span class="s1">&#39;#774f45&#39;</span><span class="p">,</span>  <span class="c1"># Browns</span>
                                   <span class="s1">&#39;#dbdbff&#39;</span><span class="p">,</span> <span class="s1">&#39;#dbdbff&#39;</span><span class="p">])</span>  
 <span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>     <span class="c1"># For errors in the dataset</span>
-<span class="n">cmap</span><span class="o">.</span><span class="n">set_over</span><span class="p">(</span><span class="s1">&#39;#ffcc00&#39;</span><span class="p">)</span>
+
 <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> 
           <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Urban and Built-Up Land</span>
           <span class="mi">2</span><span class="p">,</span>  <span class="c1"># Dryland Cropland and Pasture</span>
@@ -13454,12 +13454,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Land Use Index color map similar to the NLCD</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Hybrid FAO/STATSGO SOil Type</span>
 <span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;#f9efe5&#39;</span><span class="p">,</span> <span class="s1">&#39;#0e9f0e&#39;</span><span class="p">,</span> <span class="s1">&#39;#77f472&#39;</span><span class="p">,</span> <span class="s1">&#39;#c7ffbd&#39;</span><span class="p">,</span> <span class="s1">&#39;#1363d1&#39;</span><span class="p">,</span> 
                                   <span class="s1">&#39;#4fa4f4&#39;</span><span class="p">,</span> <span class="s1">&#39;#b3eff9&#39;</span><span class="p">,</span> <span class="s1">&#39;#a31f1f&#39;</span><span class="p">,</span> <span class="s1">&#39;#e06363&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffc7c7&#39;</span><span class="p">,</span>
-                                  <span class="s1">&#39;#27009f&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9f00&#39;</span><span class="p">,</span> <span class="s1">&#39;#fff9a9&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;#633b31&#39;</span><span class="p">,</span> <span class="s1">&#39;#b38b81&#39;</span><span class="p">])</span>                       <span class="c1"># Wetlands</span>
-<span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>     <span class="c1"># Find errors in the dataset</span>
-<span class="n">cmap</span><span class="o">.</span><span class="n">set_over</span><span class="p">(</span><span class="s1">&#39;#ffcc00&#39;</span><span class="p">)</span>
+                                  <span class="s1">&#39;#27009f&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9f00&#39;</span><span class="p">,</span> <span class="s1">&#39;#fff9a9&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;#633b31&#39;</span><span class="p">,</span> <span class="s1">&#39;#b38b81&#39;</span><span class="p">])</span>
+<span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>     <span class="c1"># For errors in the dataset</span>
+
 <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> 
           <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Sand</span>
           <span class="mi">2</span><span class="p">,</span>  <span class="c1"># Loamy Sand</span>
@@ -13521,6 +13521,75 @@ div#notebook {
 
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Streams"><strong>Streams</strong><a class="anchor-link" href="#Streams">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Colormap to identify stream order</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;#bed2ff&#39;</span><span class="p">,</span> <span class="s1">&#39;#00c5ff&#39;</span><span class="p">,</span> <span class="s1">&#39;#0084a8&#39;</span><span class="p">,</span> <span class="s1">&#39;#0070ff&#39;</span><span class="p">,</span> <span class="s1">&#39;#004da8&#39;</span><span class="p">,</span> 
+                                  <span class="s1">&#39;#ff8000&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff0000&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff00c5&#39;</span><span class="p">,</span> <span class="s1">&#39;#a900e6&#39;</span><span class="p">,</span> <span class="s1">&#39;#4b0073&#39;</span><span class="p">])</span>
+<span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>     <span class="c1"># For errors in the dataset</span>
+<span class="n">cmap</span><span class="o">.</span><span class="n">set_over</span><span class="p">(</span><span class="s1">&#39;#a900e6&#39;</span><span class="p">)</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>        <span class="c1"># horizontal</span>
+<span class="c1">#fig, ax = plt.subplots(figsize=(0.5, 10))         # vertical</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">norm</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">ColorbarBase</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span>
+                               <span class="n">ticks</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>
+                               <span class="n">spacing</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+                               <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Stream Order&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
 "
 >
 </div>
