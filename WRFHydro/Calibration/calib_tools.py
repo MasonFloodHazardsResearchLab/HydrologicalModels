@@ -33,7 +33,7 @@ def dss_sel(i, m, r, df_dvars, x_best):
 
     # Select one random d for {N} if {N} is empty
     if len(neighborhood_N) < 1:
-        neighborhood_N.append(np.random.choice(df_dvars.x_names, 1)[0])
+        neighborhood_N.append(np.random.choice(df_dvars.index, 1)[0])
     #print(f'N = {N}')
 
     # STEP 4
