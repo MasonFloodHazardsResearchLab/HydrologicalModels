@@ -23,24 +23,24 @@ def dss_sel(i, m, r, df_dvars, x_best):
 
     # Randomly select J of the D decision variables for inclusion in neighborhood {N}
     sel = [0] * len(df_dvars)
-    N = []
+    neighborhood_N = []
     for d in range(0, len(df_dvars)):
         sel[d] = np.random.choice([1,0], 1, p=[prob_i, 1-prob_i])[0]
         if sel[d] == 1:
-            #N.append(df_dvars.loc[d, 'x_names'])
-            N.append(d)
+            #neighborhood_N.append(df_dvars.loc[d, 'x_names'])
+            neighborhood_N.append(d)
     #print(f'sel = {sel}')
 
     # Select one random d for {N} if {N} is empty
-    if len(N) < 1:
-        N.append(np.random.choice(df_dvars.x_names, 1)[0])
+    if len(neighborhood_N) < 1:
+        neighborhood_N.append(np.random.choice(df_dvars.x_names, 1)[0])
     #print(f'N = {N}')
 
     # STEP 4
     # Set new values for selected parameters
     x_new = x_best
     #print(f'x_best = {x_best}')
-    for j in N:
+    for j in neighborhood_N:
         xj_min = df_dvars.loc[j, 'x_min']
         xj_max = df_dvars.loc[j, 'x_max']
         xj_best = x_best[j]
@@ -104,7 +104,7 @@ def nsewt(mod, obs, w):
         err2 = sum((obslog - obslog.mean())**2)
         nselog = 1 - (err1/err2)
         # Weighted mean
-        nsewt = ((w * nse) + ((1-w) * nselog)) / 2
+        nsewt = ((w * nse) + ((1-w) * nselog))
     return nsewt 
 
 

@@ -21,11 +21,11 @@ import output_tools
 # Neighborhood perturbation size parameter:
 r = 0.2  # 0.2 is default
 # Maximum number of function evaluations:
-m = 10
+m = 50
 # Initial solution/simulation:
 i_start = 1    # can be used to restart from any simulation
 # Number of simulation to stop (last or split)
-m_stop = 5
+m_stop = 50
 
 
 
@@ -62,7 +62,7 @@ for i in range(i_start, m_stop):
         # Define initial solution
         x_init = np.array(df_dvars.x_ini)
         x_best = x_init
-        id_best = i
+        id_best = sim_id_format
         # Create file to store parameters for each simulation
         df_calib = pd.DataFrame(df_dvars.x_names)
         df_calib['x_best'] = x_best
@@ -183,33 +183,47 @@ for i in range(i_start, m_stop):
         stat_kge = calib_tools.kge(mod, obs, n, sr=1, sa=1, sb=1)
         df_metrics.loc['kge', f'{sim_id_format}'] = stat_kge
         
+        
         # Save calibration output objective function and sim_id for the best solution
         if row == 0:
             f_x1 = stat_nsewt
+
             df_summary = pd.read_csv('output_calib_summary.csv', sep=',', index_col=['obj_function'])
             df_summary.loc[f'{usgs_id}', f'{sim_id_format}'] = f_x1
             df_summary.to_csv('output_calib_summary.csv', sep=',')
+
         elif row == 1:
             f_x2 = stat_nsewt
-            f_x_new = (f_x1 + f_x2)/2
-            df_summary = pd.read_csv('output_calib_summary.csv', sep=',', index_col=['obj_function'])
+            f_x_new = 1 - ((f_x1 + f_x2)/2)
+            
+            df_summary = pd.read_csv('output_calib_summary.csv', sep=',', index_col=['obj_function']) 
             df_summary.loc[f'{usgs_id}', f'{sim_id_format}'] = f_x2
             df_summary.loc['f_x', f'{sim_id_format}'] = f_x_new
+
+            df_calib = pd.read_csv('output_calib_param.csv', sep=',', index_col=['param_id'])
+            
             if i == 1:
                 f_best = f_x_new
                 id_best = sim_id_format
+
                 df_summary.loc['f_best', f'{sim_id_format}'] = f_best
                 df_summary.loc['id_best', f'{sim_id_format}'] = id_best
+                
+                df_calib['x_best'] = x_best
+                df_calib[f'{sim_id_format}'] = x_init
+
             else:
                 if f_x_new <= f_best:
                     f_best = f_x_new
                     id_best = sim_id_format
                     x_best = x_new
+                    df_calib['x_best'] = x_best
+
                 df_summary.loc['f_best', f'{sim_id_format}'] = f_best
                 df_summary.loc['id_best', f'{sim_id_format}'] = id_best
-            df_summary.to_csv('output_calib_summary.csv', sep=',')
-			# Update calibration parameters in output file
-			df_calib = pd.read_csv('output_calib_param.csv', sep=',', index_col=['param_id'])
-            df_calib['x_best'] = x_best
-        	df_calib[f'{sim_id_format}'] = x_new
+                
+                df_calib[f'{sim_id_format}'] = x_new
+            
             df_calib.to_csv('output_calib_param.csv', sep=',')
+            df_summary.to_csv('output_calib_summary.csv', sep=',')
+            
