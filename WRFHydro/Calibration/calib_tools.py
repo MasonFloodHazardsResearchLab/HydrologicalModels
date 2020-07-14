@@ -14,7 +14,7 @@ import pandas as pd
 # Tolson and Shoemaker (2007)
 ##################################################################
 
-def dss_sel(i, m, r, df_dvars):
+def dss_sel(i, m, r, df_dvars, x_best):
     
     # STEP 3
     # Probability each decision variable is included in {N}
@@ -65,43 +65,43 @@ def dss_sel(i, m, r, df_dvars):
 ##################################################################
 
 # Example Data
-#m = np.array([1, 2, 4, 5, 4, 3, 2, 1])                  # modeled
-#o = np.array([1.5, 2.4, 4.8, 5.7, 4.4, 3.8, 2.0, 1.3])  # observed
+#mod = np.array([1, 2, 4, 5, 4, 3, 2, 1])                  # modeled
+#obs = np.array([1.5, 2.4, 4.8, 5.7, 4.4, 3.8, 2.0, 1.3])  # observed
 #n = len(obs)
 
 
 # Nash-Sutcliffe Efficiency Coefficient (NSE)
-def nse(m, o):
-    err1 = sum((m - o)**2)
-    err2 = sum((o - o.mean())**2)
+def nse(mod, obs):
+    err1 = sum((mod - obs)**2)
+    err2 = sum((obs - obs.mean())**2)
     nse = 1 - (err1/err2)
     return nse
 
 
 # Log NSE
-def nselog(m, o):
-    mlog = np.log10(m)
-    olog = np.log10(o)
-    err1 = sum((mlog - olog)**2)
-    err2 = sum((olog - olog.mean())**2)
+def nselog(mod, obs):
+    modlog = np.log10(mod)
+    obslog = np.log10(obs)
+    err1 = sum((modlog - obslog)**2)
+    err2 = sum((obslog - obslog.mean())**2)
     nselog = 1 - (err1/err2)
     return nselog
 
 
 # Weighted NSE LogNSE
-def nsewt(m, o, w):
+def nsewt(mod, obs, w):
     if w < 0 or w >1:
         print('NSE Weigth (w) must be in between 0 and 1')
     else:   
         # NSE
-        err1 = sum((m - o)**2)
-        err2 = sum((o - o.mean())**2)
+        err1 = sum((mod - obs)**2)
+        err2 = sum((obs - obs.mean())**2)
         nse = 1 - (err1/err2)
         # Log NSE
-        mlog = np.log10(m)
-        olog = np.log10(o)
-        err1 = sum((mlog - olog)**2)
-        err2 = sum((olog - olog.mean())**2)
+        modlog = np.log10(mod)
+        obslog = np.log10(obs)
+        err1 = sum((modlog - obslog)**2)
+        err2 = sum((obslog - obslog.mean())**2)
         nselog = 1 - (err1/err2)
         # Weighted mean
         nsewt = ((w * nse) + ((1-w) * nselog)) / 2
@@ -109,34 +109,34 @@ def nsewt(m, o, w):
 
 
 # Pearson Correlation
-def pearson(m, o, n):
-    sxy = sum(o * m)
-    sx_sy = sum(o) * sum(m)
-    s_x2 = sum(o**2)
-    s_y2 = sum(m**2)
-    sx_2 = sum(o)**2
-    sy_2 = sum(m)**2
+def pearson(mod, obs, n):
+    sxy = sum(obs * mod)
+    sx_sy = sum(obs) * sum(mod)
+    s_x2 = sum(obs**2)
+    s_y2 = sum(mod**2)
+    sx_2 = sum(obs)**2
+    sy_2 = sum(mod)**2
     pearson = ((n*sxy) - (sx_sy)) / math.sqrt(((n*s_x2)-(sx_2))*((n*s_y2)-(sy_2)))
     return pearson
 
 
 # Root Mean Square Error (RMSE)
-def rmse(m, o, n):
-    rmse = math.sqrt(sum((m - o)**2)/n)
+def rmse(mod, obs, n):
+    rmse = math.sqrt(sum((mod - obs)**2)/n)
     return rmse
 
 
 # Percent Bias
-def pbias(m, o):
-    pbias = (sum(m - o) / sum(o)) * 100
+def pbias(mod, obs):
+    pbias = (sum(mod - obs) / sum(obs)) * 100
     return pbias
 
 
 # Kling-Gupta Efficiency (KGE)
-def kge(m, o, sr=1, sa=1, sb=1):
-    r = pearson(m, o, n)
-    alpha = m.std() / o.std()
-    beta = m.mean() / o.mean()
+def kge(mod, obs, n, sr=1, sa=1, sb=1):
+    r = pearson(mod, obs, n)
+    alpha = mod.std() / obs.std()
+    beta = mod.mean() / obs.mean()
     # Euclidian distance
     ed = math.sqrt(((sr*(r-1))**2) + ((sa*(alpha-1))**2) + ((sb*(beta-1))**2))
     # Kling-Gupta Efficiency

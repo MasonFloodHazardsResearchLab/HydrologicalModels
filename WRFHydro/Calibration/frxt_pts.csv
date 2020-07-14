@@ -1,0 +1,3 @@
+FID,chanobs_id,LON,LAT,STATION,USGS_ID,nwm_reach,ahps,reach_name,fc_h_act,fc_h_min,fc_h_mod,fc_h_maj,fc_h_max,fc_q_act,fc_q_min,fc_q_mod,fc_q_maj,qmax
+2,2,-77.08582868,38.84204364,"Four Mile Run at Alexandria, VA",1652500,22340313,afrv2,Four Mile Run,6,12,15,18,20.2,792,5770,10000,20000,5000
+5,5,-77.11003312,38.8070402,"Cameron Run at Alexandria, VA",1653000,22340339,crpv2,Cameron Run,7.5,11,14,16.5,15.7,2620,6300,11000,20000,5000
