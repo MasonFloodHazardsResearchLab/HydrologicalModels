@@ -35,9 +35,12 @@ def extract_chanobs2(sim_id_format, fid_list):
         # DataFrame to receive streamflow data
         df = pd.DataFrame()
         file_list = glob.glob(f'sim_{sim_id_format}/*CHANOBS_DOMAIN*')
+        file_list = sorted(file_list)
         for file_name in file_list:
             ds = xr.open_dataset(file_name)
-            time_step = datetime.strptime(file_name[7:17], '%Y%m%d%H')
+            a = 5 + len(sim_id_format)
+            b = a + 10
+            time_step = datetime.strptime(file_name[a:b], '%Y%m%d%H')
             for fid in fid_list:
                 df.loc[time_step, f'{fid}'] = ds.sel(feature_id=fid).streamflow
         df.index.names=['datetime_utc']

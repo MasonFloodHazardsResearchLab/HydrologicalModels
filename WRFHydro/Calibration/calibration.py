@@ -21,11 +21,11 @@ import output_tools
 # Neighborhood perturbation size parameter:
 r = 0.2  # 0.2 is default
 # Maximum number of function evaluations:
-m = 50
+m = 300
 # Initial solution/simulation:
 i_start = 1    # can be used to restart from any simulation
 # Number of simulation to stop (last or split)
-m_stop = 50
+m_stop = 300
 
 
 
@@ -81,9 +81,14 @@ for i in range(i_start, m_stop):
         
     elif i == i_start and i_start > 1:
         # Restart from saved solution
-        df_calib = df_calib.read_csv('output_calib_param.csv', sep=',')
+        df_calib = pd.read_csv('output_calib_param.csv', sep=',', index_col=['param_id'])
         x_init = np.array(df_calib['x_best'])
-        x_best = x_init
+        x_best = np.array(df_calib['x_best'])
+        
+        df_summary = pd.read_csv('output_calib_summary.csv', sep=',', index_col=['obj_function'])
+        f_best = df_summary.loc['f_best', f'{sim_id_format}']
+        id_best_format = ('{:0' + str(len(str(m))) + 'd}').format(i-1)
+        id_best = df_summary.loc['f_best', f'{id_best_format}']
 
     # Calibration parameters 
     if i > 1:
@@ -148,8 +153,7 @@ for i in range(i_start, m_stop):
         
         # Calculate metrics and save into file
         if i == 1:
-            data = {'metrics': ['n', 'nse', 'nselog', 'nsewt', 'pearson', 'rmse', 'pbias', 'kge', 
-                                'f_x', 'id_best']}
+            data = {'metrics': ['n', 'nse', 'nselog', 'nsewt', 'pearson', 'rmse', 'pbias', 'kge']}
             df_metrics = pd.DataFrame(data=data)
             df_metrics.set_index('metrics', inplace = True)
             df_metrics['x_best'] = 0
@@ -182,6 +186,8 @@ for i in range(i_start, m_stop):
         # Kling-Gupta Efficiency (KGE)
         stat_kge = calib_tools.kge(mod, obs, n, sr=1, sa=1, sb=1)
         df_metrics.loc['kge', f'{sim_id_format}'] = stat_kge
+
+        df_metrics.to_csv(f'output_calib_{usgs_id}.csv', sep=',')
         
         
         # Save calibration output objective function and sim_id for the best solution
@@ -226,4 +232,7 @@ for i in range(i_start, m_stop):
             
             df_calib.to_csv('output_calib_param.csv', sep=',')
             df_summary.to_csv('output_calib_summary.csv', sep=',')
-            
+
+    # Remove simulation output directory with CHANOBS files
+    cmd = f'./output_clean.sh {sim_dir}'
+    subprocess.call(cmd, shell=True)           

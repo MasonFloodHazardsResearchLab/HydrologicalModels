@@ -109,7 +109,8 @@ def nsewt(mod, obs, w):
 
 
 # Pearson Correlation
-def pearson(mod, obs, n):
+def pearson(mod, obs):
+    n = len(mod)
     sxy = sum(obs * mod)
     sx_sy = sum(obs) * sum(mod)
     s_x2 = sum(obs**2)
@@ -120,8 +121,23 @@ def pearson(mod, obs, n):
     return pearson
 
 
+# Mean Error (ME)
+def me(mod, obs):
+    n = len(mod)
+    me = (1/n) * sum(mod - obs)
+    return me
+
+
+# Mean Absolute Error (MAE)
+def mae(mod, obs):
+    n = len(mod)
+    mae = (1/n) * sum(abs(mod - obs))
+    return mae
+
+
 # Root Mean Square Error (RMSE)
-def rmse(mod, obs, n):
+def rmse(mod, obs):
+    n = len(mod)
     rmse = math.sqrt(sum((mod - obs)**2)/n)
     return rmse
 
@@ -133,7 +149,8 @@ def pbias(mod, obs):
 
 
 # Kling-Gupta Efficiency (KGE)
-def kge(mod, obs, n, sr=1, sa=1, sb=1):
+def kge(mod, obs, sr=1, sa=1, sb=1):
+    n = len(mod)
     r = pearson(mod, obs, n)
     alpha = mod.std() / obs.std()
     beta = mod.mean() / obs.mean()
